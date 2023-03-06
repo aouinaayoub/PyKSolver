@@ -4,18 +4,17 @@ import os
 #-------------------------------------------------------------------------------------------------------------------------#
 
 # choose output file name   
-output_filename="lda_v2"
+output_filename="lda"
 
 # intial guess for  density
-densR= 0.9* np.genfromtxt("dens_ref_lda.dat") 
+densR= 0.3* np.genfromtxt("dens_ref_lda.dat") 
 
 # choice of the xc functional 
 xc_type='LDA'
-#potxcR=np.load("/media/ayoub/SSD/alawa/Documents/ML-lda/local/QMC/reports/vxc_ml_factor_pbe_si.npy")
 
 # continue from last run 
 continue_from_last_run=0 
-last_run="invlda.npz" 
+last_run="lda.npz" 
 
 #-------------------------------------------------------------------------------------------------------------------------#
 
@@ -44,7 +43,7 @@ V_extR =np.genfromtxt("VPS_loc.dat")
 n_rgrid1,n_rgrid2,n_rgrid3 = [round(len(V_extR)**(1/3))]*3
 
 # nonlocal potenial 
-origin_dir= "/data155/aouina/Documents/github-inv-vxc/direct-code/lda/"
+origin_dir= "./"
 path_vnl=origin_dir+'vnl.dat'
 
 # construct or load matrix 
