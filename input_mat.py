@@ -11,6 +11,7 @@ densR= 0.3* np.genfromtxt("dens_ref_lda.dat")
 
 # choice of the xc functional 
 xc_type='LDA'
+# you can also use Libxc for python (see https://tddft.org/programs/libxc/installation/)
 
 # continue from last run 
 continue_from_last_run=0 
