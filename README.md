@@ -41,7 +41,7 @@ The author would like to acknowledge Dr. Matteo Gatti and Dr. Lucia Reining for 
 
 This code is licensed under the MIT License.
 
-.
+
 # Citation 
  If you find this code helpful, please cite: 
 > "[Aouina, A. (2022). A novel shortcut for computational materials design (Doctoral dissertation, Institut Polytechnique de Paris).](https://hal-cnrs.archives-ouvertes.fr/X-LSI/tel-03662872v1)" 
