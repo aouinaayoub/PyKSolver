@@ -3,7 +3,7 @@ import numpy as np
 
 #-------------------------------------------------------------------------------------------------------------------------#
 # intial guess for  density
-densR= np.ones((24**3))*8  /10.263087**3/4 #np.genfromtxt("../dens_ref_lda.dat") #0.9* np.genfromtxt("dens_ref_lda.dat") 
+densR= np.ones((24**3))*8  /10.263087**3/4 
 
 # choice of the xc functional 
 xc_type="LDA"
@@ -36,13 +36,6 @@ Ecut=12.5
 
 # nonlocal and local potenial directory 
 origin_dir= "./"
-
-# local potential  
-V_extR =np.genfromtxt(origin_dir+"VPS_loc.dat")
-
-# grid in real space, it depends on the cutoff 
-n_rgrid1,n_rgrid2,n_rgrid3 = [round(len(V_extR)**(1/3))]*3
-
 
 # wrap up
 input_dict={"a_l":a_l, "V_unitcell":V_unitcell, "MtR":MtR, "n_occup":n_occup, "kx":kx, "Ecut":Ecut, 
