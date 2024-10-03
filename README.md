@@ -2,11 +2,6 @@
 
 This repository contains a Python implementation for solving the Kohn-Sham equations using the plane wave method.
 
-PyKSolver consists of three main files:
-- `input_mat.py`: Defines the material parameters, chooses the exchange-correlation functional, and specifies the pseudo-potential file.
-- `utils.py`: Defines some useful functions for constructing the Hamiltonian.
-- `pyksolver.py`: Solves the Kohn-Sham equations and yields a file which contains the exchange-correlation potential, density, and bands in each iteration.
-
 # Requirements
 
 This code requires the following libraries to be installed:
