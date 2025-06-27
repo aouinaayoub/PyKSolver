@@ -1,8 +1,15 @@
 import numpy as np 
 import sys
+from typing import Any, Dict, List
 
 class System: 
-    def __init__(self,input_dict) -> None:
+    """
+    Represents a physical system for Kohn-Sham calculations, including grid setup, FFTs, and reciprocal space vectors.
+    """
+    def __init__(self,input_dict: Dict[str, Any]) -> None:
+        """
+        Initialize the System with parameters from input_dict.
+        """
         self.a_l=input_dict["a_l"]
         self.MtR=input_dict["MtR"]
         self.n_occup=input_dict["n_occup"]
@@ -119,7 +126,10 @@ class System:
     #########
     # redefine fourier transform 
     ## direct FT, using the corresponding G-set for each k
-    def myfft_v_abinit(self,fG,ik):
+    def myfft_v_abinit(self,fG: np.ndarray,ik: int) -> np.ndarray:
+        """
+        Direct Fourier transform using the corresponding G-set for each k.
+        """
         normalized_fG=np.zeros((self.n_rgrid1*self.n_rgrid2*self.n_rgrid3))+0J
         max_index1,max_index2,max_index3=int(self.n_rgrid1/2),int(self.n_rgrid2/2), int(self.n_rgrid3/2)
         for ifG in range(len(fG)): 
@@ -131,7 +141,10 @@ class System:
         fR=np.ravel(np.fft.ifftn(np.fft.ifftshift(normalized_fG3D)))*len(self.rlist) 
         return fR
     
-    def myfft_dens_v(self, fG):
+    def myfft_dens_v(self, fG: np.ndarray) -> np.ndarray:
+        """
+        Fourier transform for the density using the G-density grid.
+        """
         normalized_fG=np.zeros((self.n_rgrid1*self.n_rgrid2*self.n_rgrid3))+0J
         max_index1,max_index2,max_index3=int(self.n_rgrid1/2),int(self.n_rgrid2/2), int(self.n_rgrid3/2)
         for ifG in range(len(fG)): 
@@ -143,7 +156,10 @@ class System:
         fR=np.ravel(np.fft.ifftn(np.fft.ifftshift(normalized_fG3D)))*len(self.rlist) 
         return fR
 
-    def myifft_dens_v(self, fR): # inverse FT of the density which is different from above because we use more G vectors
+    def myifft_dens_v(self, fR: np.ndarray) -> np.ndarray:
+        """
+        Inverse Fourier transform for the density using the G-density grid.
+        """
         fR3D=np.reshape(fR,(self.n_rgrid3,self.n_rgrid2,self.n_rgrid1))
         fR3D=fR3D
         normalized_fG= np.ravel(np.fft.fftshift(np.fft.fftn(fR3D))/len(self.rlist))
@@ -157,8 +173,7 @@ class System:
                 fG.append(normalized_fG[ind])
             else: 
                 fG.append(0)
-                sys.stdout = open("warning_fft.txt", "a")
-                print("warning",ind,g)
-                sys.stdout.close()
+                with open("warning_fft.txt", "a") as f:
+                    f.write(f"warning {ind} {g}\n")
         return np.array(fG)    
 #######################################      
